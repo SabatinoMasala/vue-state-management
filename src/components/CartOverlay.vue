@@ -25,9 +25,7 @@
 
                     <div class="mt-8">
                       <div class="flow-root">
-                        <ul role="list" class="-my-6 divide-y divide-gray-200">
-                          <CartRow :order-line="orderLine" v-for="orderLine in cart" :key="orderLine.id" />
-                        </ul>
+                        <ul role="list" class="-my-6 divide-y divide-gray-200"></ul>
                       </div>
                     </div>
                   </div>
@@ -64,7 +62,6 @@
 <script setup>
 import {XMarkIcon} from '@heroicons/vue/24/outline'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
-import CartRow from "@/components/CartRow.vue";
 
 const props = defineProps({
   open: Boolean
