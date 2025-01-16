@@ -26,7 +26,7 @@
                     <div class="mt-8">
                       <div class="flow-root">
                         <ul role="list" class="-my-6 divide-y divide-gray-200">
-                          <CartRow v-for="product in cart" :key="product.id" />
+                          <CartRow :product="product" v-for="product in cart" :key="product.id" />
                         </ul>
                       </div>
                     </div>
