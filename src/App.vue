@@ -1,6 +1,13 @@
 <template>
   <div>
     <Navbar @cart-clicked="cartOverlayOpen = true" :cart="cart" />
+    <CartOverlay
+        :cart="cart"
+        :open="cartOverlayOpen"
+        @close="cartOverlayOpen = false"
+        @increment="incrementProduct"
+        @decrement="decrementProduct"
+        @remove="removeProduct" />
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-4">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <ProductCard
@@ -11,13 +18,6 @@
             @decrement="decrementProduct"
             :product="product" />
       </div>
-      <CartOverlay
-          :cart="cart"
-          :open="cartOverlayOpen"
-          @close="cartOverlayOpen = false"
-          @increment="incrementProduct"
-          @decrement="decrementProduct"
-          @remove="removeProduct" />
       <pre>{{ cart }}</pre>
     </div>
   </div>
