@@ -90,26 +90,11 @@
 </template>
 
 <script setup>
-import {PlusCircleIcon, MinusCircleIcon, XMarkIcon} from '@heroicons/vue/24/outline'
+import {MinusCircleIcon, PlusCircleIcon, XMarkIcon} from '@heroicons/vue/24/outline'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
-import {computed} from "vue";
-import {format} from '@/lib/number';
 
 const props = defineProps({
-  open: Boolean,
-  cart: {
-    type: Array,
-    required: true,
-  }
+  open: Boolean
 })
-
-const cartSubtotal = computed(() => {
-  const cartSubtotal = props.cart.reduce((total, product) => total + (product.quantity * product.price), 0);
-  return format(cartSubtotal);
-});
-
-const subtotal = (product) => {
-  return format(product.quantity * product.price);
-}
 
 </script>

@@ -12,31 +12,14 @@
           {{ formattedPrice }}
         </p>
       </div>
-      <div class="flex justify-center items-center space-x-2">
-        <Button @click="$emit('decrement', product)">
-          <MinusIcon />
-        </Button>
-        <span class="text-sm font-medium text-gray-900">
-          {{ amount }}
-        </span>
-        <Button @click="$emit('increment', product)">
-          <PlusIcon />
-        </Button>
-      </div>
     </div>
   </div>
 </template>
 <script setup>
-import {MinusIcon, PlusIcon} from '@heroicons/vue/24/outline'
-import {Button} from '@/components/ui/button';
 import {computed} from "vue";
-import { format } from '@/lib/number';
+import {format} from '@/lib/number';
 
 const props = defineProps({
-  cart: {
-    type: Array,
-    required: true
-  },
   product: {
     type: Object,
     required: true
@@ -45,11 +28,6 @@ const props = defineProps({
 
 const formattedPrice = computed(() => {
   return format(props.product.price);
-})
-
-const amount = computed(() => {
-  const item = props.cart.find((item) => item.id === props.product.id);
-  return item ? item.quantity : 0;
 })
 
 </script>

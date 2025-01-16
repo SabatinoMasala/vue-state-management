@@ -1,24 +1,17 @@
 <template>
   <div>
-    <Navbar @cart-clicked="cartOverlayOpen = true" :cart="cart" />
+    <Navbar
+        @cart-clicked="cartOverlayOpen = true" />
     <CartOverlay
-        :cart="cart"
         :open="cartOverlayOpen"
-        @close="cartOverlayOpen = false"
-        @increment="incrementProduct"
-        @decrement="decrementProduct"
-        @remove="removeProduct" />
+        @close="cartOverlayOpen = false" />
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-4">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <ProductCard
             :key="product.id"
             v-for="product in products"
-            :cart="cart"
-            @increment="incrementProduct"
-            @decrement="decrementProduct"
             :product="product" />
       </div>
-      <pre>{{ cart }}</pre>
     </div>
   </div>
 </template>
@@ -28,36 +21,7 @@ import ProductCard from '@/components/ProductCard.vue';
 import {ref} from "vue";
 import CartOverlay from "@/components/CartOverlay.vue";
 
-const cart = ref([]);
 const cartOverlayOpen = ref(false);
-
-const incrementProduct = (product) => {
-  const item = cart.value.find((item) => item.id === product.id);
-  if (item) {
-    item.quantity++;
-  } else {
-    cart.value.push({ ...product, quantity: 1 });
-  }
-}
-
-const removeProduct = (product) => {
-  const item = cart.value.find((item) => item.id === product.id);
-  if (item) {
-    const index = cart.value.indexOf(item);
-    cart.value.splice(index, 1);
-  }
-}
-
-const decrementProduct = (product) => {
-  const item = cart.value.find((item) => item.id === product.id);
-  if (item) {
-    item.quantity--;
-    if (item.quantity <= 0) {
-      const index = cart.value.indexOf(item);
-      cart.value.splice(index, 1);
-    }
-  }
-}
 
 const products = [{
   id: 1,
