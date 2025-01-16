@@ -31,4 +31,10 @@
 </template>
 <script setup>
 import {MinusCircleIcon, PlusCircleIcon} from "@heroicons/vue/24/outline";
+const props = defineProps({
+  orderLine: {
+    type: Object,
+    required: true
+  }
+})
 </script>
