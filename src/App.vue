@@ -1,8 +1,45 @@
 <template>
   <div>
-    <Button>Hello World</Button>
+    <Navbar />
+      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-4">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ProductCard :key="product.id" v-for="product in products" :product="product" />
+        </div>
+      </div>
   </div>
 </template>
 <script setup>
-import { Button } from '@/components/ui/button'
+import Navbar from '@/components/Navbar.vue';
+import ProductCard from '@/components/ProductCard.vue';
+const products = [{
+  id: 1,
+  title: 'Pizza',
+  description: 'A tasty pizza with tomato sauce, mozzarella cheese, and fresh basil.',
+  price: 8.95
+}, {
+  id: 2,
+  title: 'Pasta',
+  description: 'A traditional pasta with tomato sauce, mozzarella cheese, and fresh basil.',
+  price: 14.95
+}, {
+  id: 3,
+  title: 'Burger',
+  description: 'A delicious burger with cheddar cheese, lettuce, tomato, and pickles.',
+  price: 12.95
+}, {
+  id: 4,
+  title: 'French fries',
+  description: 'Golden brown fries with ketchup.',
+  price: 4.95
+}, {
+  id: 5,
+  title: 'Caesar Salad',
+  description: 'A classic Caesar salad with romaine lettuce, croutons, and parmesan cheese.',
+  price: 9.95
+}, {
+  id: 6,
+  title: 'Sandwich',
+  description: 'A fresh sandwich with turkey, lettuce, tomato, and mayo.',
+  price: 12.95
+}]
 </script>
