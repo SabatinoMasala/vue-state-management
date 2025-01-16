@@ -6,7 +6,9 @@
           <h3>
             {{ orderLine.title }}
           </h3>
-          <p class="ml-4">-</p>
+          <p class="ml-4">
+            {{ subtotal }}
+          </p>
         </div>
       </div>
       <div class="flex flex-1 items-end justify-between text-sm">
@@ -31,10 +33,17 @@
 </template>
 <script setup>
 import {MinusCircleIcon, PlusCircleIcon} from "@heroicons/vue/24/outline";
+import {format} from '@/lib/number';
+import {computed} from "vue";
 const props = defineProps({
   orderLine: {
     type: Object,
     required: true
   }
 })
+
+const subtotal = computed(() => {
+  return format(props.orderLine.price * props.orderLine.quantity);
+})
+
 </script>
