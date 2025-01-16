@@ -26,14 +26,14 @@
                     <div class="mt-8">
                       <div class="flow-root">
                         <ul role="list" class="-my-6 divide-y divide-gray-200">
-                          <li v-for="product in cart" :key="product.id" class="flex py-6">
+                          <li v-for="product in cart" :key="product.id" class="flex py-6" v-if="false">
                             <div class="ml-4 flex flex-1 flex-col">
                               <div>
                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                   <h3>
                                     {{ product.title }}
                                   </h3>
-                                  <p class="ml-4">{{ subtotal(product) }}</p>
+                                  <p class="ml-4">-</p>
                                 </div>
                               </div>
                               <div class="flex flex-1 items-end justify-between text-sm">
@@ -63,7 +63,7 @@
                   <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div class="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
-                      <p>{{ cartSubtotal }}</p>
+                      <p>-</p>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     <div class="mt-6">
