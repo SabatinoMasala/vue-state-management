@@ -12,14 +12,23 @@
           {{ formattedPrice }}
         </p>
       </div>
+      <Stepper
+          @increment="$emit('increment', product)"
+          @decrement="$emit('decrement', product)"
+      />
     </div>
   </div>
 </template>
 <script setup>
 import {computed} from "vue";
 import {format} from '@/lib/number';
+import Stepper from "@/components/Stepper.vue";
 
 const props = defineProps({
+  cart: {
+    type: array,
+    required: true,
+  },
   product: {
     type: Object,
     required: true
