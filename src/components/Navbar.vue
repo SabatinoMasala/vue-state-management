@@ -8,6 +8,7 @@
               <span class="absolute -inset-1.5" />
               <span class="sr-only">View cart</span>
               <ShoppingCartIcon class="size-6" aria-hidden="true" />
+              <span class="ml-1 bg-red-500 w-6 h-6 text-sm flex items-center justify-center block rounded-full text-white" v-if="amount > 0">{{ amount }}</span>
             </button>
           </div>
         </div>
@@ -18,10 +19,17 @@
 
 <script setup>
 import {ShoppingCartIcon} from '@heroicons/vue/24/outline'
+import {computed} from "vue";
+
 const props = defineProps({
   cart: {
     type: Array,
-    required: true,
+    required: true
   }
 })
+
+const amount = computed(() => {
+  return props.cart.reduce((total, product) => total + product.quantity, 0);
+});
+
 </script>
