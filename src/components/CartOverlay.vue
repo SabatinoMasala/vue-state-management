@@ -25,7 +25,11 @@
 
                     <div class="mt-8">
                       <div class="flow-root">
-                        <ul role="list" class="-my-6 divide-y divide-gray-200"></ul>
+                        <Cart
+                            @increment="$emit('increment', $event)"
+                            @decrement="$emit('decrement', $event)"
+                            @remove="$emit('remove', $event)"
+                            :cart="cart" />
                       </div>
                     </div>
                   </div>
@@ -33,7 +37,7 @@
                   <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div class="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
-                      <p>-</p>
+                      <p>{{ subtotal }}</p>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     <div class="mt-6">
@@ -62,9 +66,21 @@
 <script setup>
 import {XMarkIcon} from '@heroicons/vue/24/outline'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
+import Cart from "@/components/Cart.vue";
+import {computed} from "vue";
+import {format} from "@/lib/number.js";
 
 const props = defineProps({
+  cart: {
+    type: Array,
+    required: true,
+  },
   open: Boolean
+})
+
+const subtotal = computed(() => {
+  const subtotal = props.cart.reduce((total, product) => total + product.price * product.quantity, 0);
+  return format(subtotal);
 })
 
 </script>
