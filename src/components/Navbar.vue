@@ -19,17 +19,12 @@
 
 <script setup>
 import {ShoppingCartIcon} from '@heroicons/vue/24/outline'
-import {computed} from "vue";
+import {computed, inject} from "vue";
 
-const props = defineProps({
-  cart: {
-    type: Array,
-    required: true
-  }
-})
+const {cart} = inject('cart');
 
 const amount = computed(() => {
-  return props.cart.reduce((total, product) => total + product.quantity, 0);
+  return cart.value.reduce((total, product) => total + product.quantity, 0);
 });
 
 </script>

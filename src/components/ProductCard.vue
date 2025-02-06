@@ -14,22 +14,20 @@
       </div>
       <Stepper
           :amount="amount"
-          @increment="$emit('increment', product)"
-          @decrement="$emit('decrement', product)"
+          @increment="incrementProduct(product)"
+          @decrement="decrementProduct(product)"
       />
     </div>
   </div>
 </template>
 <script setup>
-import {computed} from "vue";
+import {computed, inject} from "vue";
 import {format} from '@/lib/number';
 import Stepper from "@/components/Stepper.vue";
 
+const {cart, incrementProduct, decrementProduct} = inject('cart');
+
 const props = defineProps({
-  cart: {
-    type: Array,
-    required: true
-  },
   product: {
     type: Object,
     required: true
@@ -41,7 +39,7 @@ const formattedPrice = computed(() => {
 })
 
 const amount = computed(() => {
-  const foundValue = props.cart.find((value) => value.id === props.product.id);
+  const foundValue = cart.value.find((value) => value.id === props.product.id);
   return foundValue ? foundValue.quantity : 0;
 })
 

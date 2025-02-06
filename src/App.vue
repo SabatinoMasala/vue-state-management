@@ -1,21 +1,13 @@
 <template>
   <div>
     <Navbar
-        :cart="cart"
         @cart-clicked="cartOverlayOpen = true" />
     <CartOverlay
-        @increment="incrementProduct"
-        @decrement="decrementProduct"
-        @remove="removeProduct"
-        :cart="cart"
         :open="cartOverlayOpen"
         @close="cartOverlayOpen = false" />
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-4">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <ProductCard
-            :cart="cart"
-            @increment="incrementProduct"
-            @decrement="decrementProduct"
             :key="product.id"
             v-for="product in products"
             :product="product" />
@@ -26,7 +18,7 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue';
 import ProductCard from '@/components/ProductCard.vue';
-import {ref} from "vue";
+import {ref, provide} from "vue";
 import CartOverlay from "@/components/CartOverlay.vue";
 
 const cartOverlayOpen = ref(false);
@@ -58,6 +50,13 @@ const decrementProduct = (product) => {
     }
   }
 }
+
+provide('cart', {
+  cart,
+  removeProduct,
+  incrementProduct,
+  decrementProduct,
+})
 
 const products = [{
   id: 1,
