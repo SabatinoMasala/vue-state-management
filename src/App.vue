@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar
+        :cart="cart"
         @cart-clicked="cartOverlayOpen = true" />
     <CartOverlay
         @increment="incrementProduct"
