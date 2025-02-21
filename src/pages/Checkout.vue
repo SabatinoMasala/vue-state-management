@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="sm:flex sm:items-center sm:justify-between mb-3">
+        <RouterLink to="/" class="rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+          Go back home
+        </RouterLink>
+      </div>
       <h2 class="sr-only">Checkout</h2>
 
       <div class="mt-10 lg:mt-0">
