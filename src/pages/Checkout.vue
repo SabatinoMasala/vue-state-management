@@ -1,0 +1,44 @@
+<template>
+  <div>
+    <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="sr-only">Checkout</h2>
+
+      <div class="mt-10 lg:mt-0">
+        <h2 class="text-lg font-medium text-gray-900">Order summary</h2>
+
+        <div class="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
+          <h3 class="sr-only">Items in your cart</h3>
+          <div class="divide-y divide-gray-200 px-4 py-6 sm:px-6">
+            <Cart />
+          </div>
+          <dl class="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
+            <div class="flex items-center justify-between">
+              <dt class="text-sm">Subtotal</dt>
+              <dd class="text-sm font-medium text-gray-900">$64.00</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="text-sm">Shipping</dt>
+              <dd class="text-sm font-medium text-gray-900">$5.00</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="text-sm">Taxes</dt>
+              <dd class="text-sm font-medium text-gray-900">$5.52</dd>
+            </div>
+            <div class="flex items-center justify-between border-t border-gray-200 pt-6">
+              <dt class="text-base font-medium">Total</dt>
+              <dd class="text-base font-medium text-gray-900">$75.52</dd>
+            </div>
+          </dl>
+
+          <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+            <button type="submit" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import Cart from '@/components/Cart.vue';
+</script>
