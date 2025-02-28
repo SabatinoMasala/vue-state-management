@@ -11,7 +11,7 @@
 </template>
 <script setup>
 import CartRow from '@/components/CartRow.vue';
-import {inject} from 'vue';
+import {useCart} from "@/composables/cart.js";
 
-const {cart, incrementProduct, decrementProduct, removeProduct} = inject('cart');
+const {cart, incrementProduct, decrementProduct, removeProduct} = useCart();
 </script>

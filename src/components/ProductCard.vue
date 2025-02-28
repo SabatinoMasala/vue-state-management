@@ -21,11 +21,12 @@
   </div>
 </template>
 <script setup>
-import {computed, inject} from "vue";
+import {computed} from "vue";
 import {format} from '@/lib/number';
 import Stepper from "@/components/Stepper.vue";
+import {useCart} from '@/composables/cart'
 
-const {cart, incrementProduct, decrementProduct} = inject('cart');
+const {cart, incrementProduct, decrementProduct} = useCart();
 
 const props = defineProps({
   product: {

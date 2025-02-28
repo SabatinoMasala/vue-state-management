@@ -19,9 +19,10 @@
 
 <script setup>
 import {ShoppingCartIcon} from '@heroicons/vue/24/outline'
-import {computed, inject} from "vue";
+import {computed} from "vue";
+import {useCart} from '@/composables/cart';
 
-const {cart} = inject('cart');
+const {cart} = useCart();
 
 const amount = computed(() => {
   return cart.value.reduce((total, product) => total + product.quantity, 0);

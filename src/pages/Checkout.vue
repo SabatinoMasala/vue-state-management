@@ -19,20 +19,20 @@
           <dl class="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
             <div class="flex items-center justify-between">
               <dt class="text-sm">Subtotal</dt>
-              <dd class="text-sm font-medium text-gray-900">...</dd>
+              <dd class="text-sm font-medium text-gray-900">{{ format(subtotal) }}</dd>
             </div>
             <div class="flex items-center justify-between">
               <dt class="text-sm">Taxes</dt>
-              <dd class="text-sm font-medium text-gray-900">...</dd>
+              <dd class="text-sm font-medium text-gray-900">{{ format(taxes) }}</dd>
             </div>
             <div class="flex items-center justify-between border-t border-gray-200 pt-6">
               <dt class="text-base font-medium">Total</dt>
-              <dd class="text-base font-medium text-gray-900">...</dd>
+              <dd class="text-base font-medium text-gray-900">{{ format(total) }}</dd>
             </div>
           </dl>
 
           <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-            <button type="submit" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm order</button>
+            <button @click="confirmOrder" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm order</button>
           </div>
         </div>
       </div>
@@ -42,8 +42,16 @@
 
 <script setup>
 import Cart from '@/components/Cart.vue';
-import {provide} from 'vue'
-provide('cart', {
-  cart: [],
-})
+import {format} from '@/lib/number.js';
+import {useRouter} from 'vue-router';
+import {useCart} from '@/composables/cart.js';
+const {subtotal, total, taxes, clearCart} = useCart();
+const router = useRouter();
+
+const confirmOrder = () => {
+  alert('Thanks for ordering!');
+  clearCart();
+  router.push('/');
+}
+
 </script>
