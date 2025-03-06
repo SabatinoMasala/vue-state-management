@@ -33,7 +33,7 @@
                   <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div class="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
-                      <p>{{ format(subtotal) }}</p>
+                      <p>{{ format(cartStore.subtotal) }}</p>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     <div class="mt-6">
@@ -63,11 +63,9 @@
 import {XMarkIcon} from '@heroicons/vue/24/outline'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import Cart from "@/components/Cart.vue";
-import {computed} from "vue";
 import {format} from "@/lib/number.js";
-import {useCart} from '@/composables/cart'
-
-const {cart, subtotal} = useCart();
+import {useCartStore} from "@/stores/Cart.js";
+const cartStore = useCartStore();
 
 const props = defineProps({
   open: Boolean

@@ -19,15 +19,15 @@
           <dl class="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
             <div class="flex items-center justify-between">
               <dt class="text-sm">Subtotal</dt>
-              <dd class="text-sm font-medium text-gray-900">{{ format(subtotal) }}</dd>
+              <dd class="text-sm font-medium text-gray-900">{{ format(cartStore.subtotal) }}</dd>
             </div>
             <div class="flex items-center justify-between">
               <dt class="text-sm">Taxes</dt>
-              <dd class="text-sm font-medium text-gray-900">{{ format(taxes) }}</dd>
+              <dd class="text-sm font-medium text-gray-900">{{ format(cartStore.taxes) }}</dd>
             </div>
             <div class="flex items-center justify-between border-t border-gray-200 pt-6">
               <dt class="text-base font-medium">Total</dt>
-              <dd class="text-base font-medium text-gray-900">{{ format(total) }}</dd>
+              <dd class="text-base font-medium text-gray-900">{{ format(cartStore.total) }}</dd>
             </div>
           </dl>
 
@@ -44,13 +44,14 @@
 import Cart from '@/components/Cart.vue';
 import {format} from '@/lib/number.js';
 import {useRouter} from 'vue-router';
-import {useCart} from '@/composables/cart.js';
-const {subtotal, total, taxes, clearCart} = useCart();
+import {useCartStore} from "@/stores/Cart.js";
+const cartStore = useCartStore();
+
 const router = useRouter();
 
 const confirmOrder = () => {
   alert('Thanks for ordering!');
-  clearCart();
+  cartStore.clearCart();
   router.push('/');
 }
 

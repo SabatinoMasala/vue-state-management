@@ -14,8 +14,8 @@
       </div>
       <Stepper
           :amount="amount"
-          @increment="incrementProduct(product)"
-          @decrement="decrementProduct(product)"
+          @increment="cartStore.incrementProduct(product)"
+          @decrement="cartStore.decrementProduct(product)"
       />
     </div>
   </div>
@@ -24,9 +24,8 @@
 import {computed} from "vue";
 import {format} from '@/lib/number';
 import Stepper from "@/components/Stepper.vue";
-import {useCart} from '@/composables/cart'
-
-const {cart, incrementProduct, decrementProduct} = useCart();
+import {useCartStore} from "@/stores/Cart.js";
+const cartStore = useCartStore();
 
 const props = defineProps({
   product: {
@@ -40,7 +39,7 @@ const formattedPrice = computed(() => {
 })
 
 const amount = computed(() => {
-  const foundValue = cart.value.find((value) => value.id === props.product.id);
+  const foundValue = cartStore.cart.find((value) => value.id === props.product.id);
   return foundValue ? foundValue.quantity : 0;
 })
 
