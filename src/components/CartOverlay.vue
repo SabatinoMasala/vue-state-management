@@ -37,15 +37,16 @@
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     <div class="mt-6">
-                      <RouterLink to="/checkout" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</RouterLink>
+                      <Button class="w-full" size="lg" as-child>
+                        <RouterLink to="/checkout">Checkout</RouterLink>
+                      </Button>
                     </div>
                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
-                        or{{ ' ' }}
-                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500" @click="$emit('close')">
+                        <Button type="button" variant="link" @click="$emit('close')">
                           Continue Shopping
                           <span aria-hidden="true"> &rarr;</span>
-                        </button>
+                        </Button>
                       </p>
                     </div>
                   </div>
@@ -65,6 +66,7 @@ import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from 
 import Cart from "@/components/Cart.vue";
 import {format} from "@/lib/number.js";
 import {useCartStore} from "@/stores/Cart.js";
+import {Button} from "@/components/ui/button/index.js";
 const cartStore = useCartStore();
 
 const props = defineProps({

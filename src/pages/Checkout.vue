@@ -36,8 +36,10 @@
               <p class="text-lg font-bold mb-3">Recommended with your purchase</p>
               <ProductGrid class="mb-3" :loading="productsStore.loading" :products="productsStore.upsellingProducts" />
             </template>
-            <button @click="confirmOrder" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm order</button>
           </div>
+        </div>
+        <div class="text-center mt-5">
+          <Button variant="" @click="confirmOrder">Confirm order</Button>
         </div>
       </div>
     </div>
@@ -51,6 +53,8 @@ import {useRouter} from 'vue-router';
 import {useCartStore} from "@/stores/Cart.js";
 import {useProductsStore} from "@/stores/Products.js";
 import ProductGrid from "@/components/ProductGrid.vue";
+import {Button} from "@/components/ui/button/index.js";
+
 const cartStore = useCartStore();
 const productsStore = useProductsStore();
 
