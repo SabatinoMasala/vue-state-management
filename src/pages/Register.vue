@@ -46,6 +46,7 @@ import {useUserStore} from "@/stores/User.js";
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert'
 import {AlertCircle} from 'lucide-vue-next'
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 
 const hasError = (field) => {
   return errors.value.hasOwnProperty(field);
@@ -65,6 +66,7 @@ const credentials = ref({
 
 const message = ref('');
 const errors = ref({});
+const router = useRouter();
 
 const handleRegister = async () => {
   const registerResponse = await userStore.register(
@@ -76,7 +78,7 @@ const handleRegister = async () => {
     message.value = registerResponse.body.message;
     errors.value = Object.assign(errors.value, registerResponse.body.errors);
   } else {
-    alert('ok!');
+    router.push('/');
   }
 }
 

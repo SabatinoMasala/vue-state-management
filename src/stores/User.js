@@ -6,13 +6,24 @@ const user = mande('http://vue-state-management-backend.test/api/user');
 
 export const useUserStore = defineStore('user', {
     state: () => ({
+        didInit: false,
         token: null,
         user: null,
     }),
     actions: {
-        setToken(token) {
+        async init() {
+            const token = JSON.parse(localStorage.getItem('token'));
+            if (token) {
+                await this.setToken(token);
+            }
+            this.didInit = true;
+        },
+        async setToken(token) {
             this.token = token;
-            this.fetchUser();
+            localStorage.setItem('token', JSON.stringify(this.token));
+            if (token) {
+                await this.fetchUser();
+            }
         },
         async fetchUser() {
             const response = await user.get({
@@ -24,7 +35,6 @@ export const useUserStore = defineStore('user', {
         },
         setUser(user) {
             this.user = user;
-            localStorage.setItem('token', JSON.stringify(this.token));
         },
         async login(email, password) {
             try {
@@ -32,7 +42,7 @@ export const useUserStore = defineStore('user', {
                     email,
                     password,
                 });
-                this.setToken(response.token);
+                await this.setToken(response.token);
                 return {
                     success: true,
                 };
@@ -63,6 +73,7 @@ export const useUserStore = defineStore('user', {
         },
         logout() {
             this.user = null;
+            this.setToken(null);
         },
     }
 });

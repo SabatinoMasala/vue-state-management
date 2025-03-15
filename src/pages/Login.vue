@@ -33,22 +33,18 @@
   </form>
 </template>
 <script setup>
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import {useRouter, useRoute} from "vue-router";
+import {Button} from '@/components/ui/button';
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from '@/components/ui/card';
+import {Input} from '@/components/ui/input';
+import {Label} from '@/components/ui/label';
 import {useUserStore} from "@/stores/User.js";
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { AlertCircle } from 'lucide-vue-next'
-import {computed, ref} from "vue";
+import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert'
+import {AlertCircle} from 'lucide-vue-next'
+import {ref} from "vue";
 
+const router = useRouter();
+const route = useRoute();
 const hasError = (field) => {
   return errors.value.hasOwnProperty(field);
 }
@@ -76,7 +72,7 @@ const handleLogin = async () => {
     message.value = loginResponse.body.message;
     errors.value = Object.assign(errors.value, loginResponse.body.errors);
   } else {
-    alert('ok!');
+    router.push(route.query.redirect ?? '/');
   }
 }
 
