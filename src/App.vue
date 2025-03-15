@@ -2,5 +2,8 @@
   <RouterView />
 </template>
 <script setup>
-import {provide, ref} from "vue";
+import {useProductsStore} from "@/stores/Products.js";
+
+const productsStore = useProductsStore();
+productsStore.fetchProducts();
 </script>

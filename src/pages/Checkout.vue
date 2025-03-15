@@ -32,6 +32,10 @@
           </dl>
 
           <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+            <template v-if="productsStore.upsellingProducts.length > 0">
+              <p class="text-lg font-bold mb-3">Recommended with your purchase</p>
+              <ProductGrid class="mb-3" :loading="productsStore.loading" :products="productsStore.upsellingProducts" />
+            </template>
             <button @click="confirmOrder" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Confirm order</button>
           </div>
         </div>
@@ -45,7 +49,10 @@ import Cart from '@/components/Cart.vue';
 import {format} from '@/lib/number.js';
 import {useRouter} from 'vue-router';
 import {useCartStore} from "@/stores/Cart.js";
+import {useProductsStore} from "@/stores/Products.js";
+import ProductGrid from "@/components/ProductGrid.vue";
 const cartStore = useCartStore();
+const productsStore = useProductsStore();
 
 const router = useRouter();
 

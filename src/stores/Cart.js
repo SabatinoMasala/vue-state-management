@@ -61,11 +61,17 @@ export const useCartStore = defineStore('cart', () => {
         return Math.round((subtotal.value + taxes.value) * 100) / 100;
     })
 
+    const amountForProduct = (product) => {
+        const foundValue = cart.value.find((value) => value.id === product.id);
+        return foundValue ? foundValue.quantity : 0;
+    }
+
     return {
         cart,
         subtotal,
         taxes,
         total,
+        amountForProduct,
         clearCart,
         removeProduct,
         incrementProduct,

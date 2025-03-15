@@ -39,8 +39,7 @@ const formattedPrice = computed(() => {
 })
 
 const amount = computed(() => {
-  const foundValue = cartStore.cart.find((value) => value.id === props.product.id);
-  return foundValue ? foundValue.quantity : 0;
+  return cartStore.amountForProduct(props.product);
 })
 
 </script>
