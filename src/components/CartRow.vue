@@ -13,13 +13,13 @@
       </div>
       <div class="flex flex-1 items-end justify-between text-sm">
         <div class="flex space-x-2">
-          <button type="button" class="text-sm font-medium text-indigo-600 hover:text-indigo-500" @click="$emit('decrement')">
+          <button type="button" class="text-sm font-medium text-slate-600 hover:text-slate-500" @click="$emit('decrement')">
             <MinusCircleIcon class="w-5 h-5" />
           </button>
           <p class="text-gray-500 w-5 text-center">
             {{ orderLine.quantity }}
           </p>
-          <button type="button" class="text-sm font-medium text-indigo-600 hover:text-indigo-500" @click="$emit('increment')">
+          <button type="button" class="text-sm font-medium text-slate-600 hover:text-slate-500" @click="$emit('increment')">
             <PlusCircleIcon class="w-5 h-5" />
           </button>
         </div>

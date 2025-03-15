@@ -4,7 +4,7 @@
       <div class="flex h-16 justify-between">
         <div class="flex items-center ml-auto">
           <div class="md:ml-4 md:flex md:shrink-0 md:items-center">
-            <button type="button" class="relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" @click="$emit('cart-clicked')">
+            <button type="button" class="relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2" @click="$emit('cart-clicked')">
               <span class="absolute -inset-1.5" />
               <span class="sr-only">View cart</span>
               <ShoppingCartIcon class="size-6" aria-hidden="true" />
