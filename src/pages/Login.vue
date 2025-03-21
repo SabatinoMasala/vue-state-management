@@ -33,18 +33,15 @@
   </form>
 </template>
 <script setup>
-import {useRouter, useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
-import {useUserStore} from "@/stores/User.js";
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert'
 import {AlertCircle} from 'lucide-vue-next'
 import {ref} from "vue";
 
-const router = useRouter();
-const route = useRoute();
 const hasError = (field) => {
   return errors.value.hasOwnProperty(field);
 }
@@ -52,8 +49,6 @@ const hasError = (field) => {
 const getError = (field) => {
   return errors.value[field].join(', ');
 }
-
-const userStore = useUserStore();
 
 const credentials = ref({
   email: '',
@@ -64,16 +59,7 @@ const message = ref('');
 const errors = ref({});
 
 const handleLogin = async () => {
-  const loginResponse = await userStore.login(
-      credentials.value.email,
-      credentials.value.password,
-  );
-  if (!loginResponse.success) {
-    message.value = loginResponse.body.message;
-    errors.value = Object.assign(errors.value, loginResponse.body.errors);
-  } else {
-    router.push(route.query.redirect ?? '/');
-  }
+  // TODO
 }
 
 </script>

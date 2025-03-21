@@ -42,7 +42,6 @@ import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
-import {useUserStore} from "@/stores/User.js";
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert'
 import {AlertCircle} from 'lucide-vue-next'
 import {ref} from "vue";
@@ -56,8 +55,6 @@ const getError = (field) => {
   return errors.value[field].join(', ');
 }
 
-const userStore = useUserStore();
-
 const credentials = ref({
   name: '',
   email: '',
@@ -69,17 +66,7 @@ const errors = ref({});
 const router = useRouter();
 
 const handleRegister = async () => {
-  const registerResponse = await userStore.register(
-      credentials.value.name,
-      credentials.value.email,
-      credentials.value.password,
-  );
-  if (!registerResponse.success) {
-    message.value = registerResponse.body.message;
-    errors.value = Object.assign(errors.value, registerResponse.body.errors);
-  } else {
-    router.push('/');
-  }
+  // TODO
 }
 
 </script>
