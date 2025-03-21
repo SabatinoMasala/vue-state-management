@@ -17,7 +17,7 @@
         </Alert>
         <div class="grid gap-2">
           <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required v-model="credentials.email" />
+          <Input id="email" type="email" placeholder="info@example.com" required v-model="credentials.email" />
           <small class="text-red-500" v-if="hasError('email')">{{ getError('email') }}</small>
         </div>
         <div class="grid gap-2">

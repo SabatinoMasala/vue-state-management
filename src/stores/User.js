@@ -14,7 +14,11 @@ export const useUserStore = defineStore('user', {
         async init() {
             const token = JSON.parse(localStorage.getItem('token'));
             if (token) {
-                await this.setToken(token);
+                try {
+                    await this.setToken(token);
+                } catch (e) {
+                    this.setToken(null);
+                }
             }
             this.didInit = true;
         },
