@@ -19,7 +19,8 @@ const router = useRouter();
 const userStore = useUserStore();
 
 const logout = async () => {
-  // TODO
+  router.push('/');
+  userStore.logout();
 }
 
 </script>

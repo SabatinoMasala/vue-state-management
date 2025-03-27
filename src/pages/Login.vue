@@ -41,6 +41,7 @@ import {Label} from '@/components/ui/label';
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert'
 import {AlertCircle} from 'lucide-vue-next'
 import {ref} from "vue";
+import {useUserStore} from "@/stores/User.js";
 
 const hasError = (field) => {
   return errors.value.hasOwnProperty(field);
@@ -57,9 +58,21 @@ const credentials = ref({
 
 const message = ref('');
 const errors = ref({});
+const router = useRouter();
+const route = useRoute();
+const userStore = useUserStore();
 
 const handleLogin = async () => {
-  // TODO
+  const loginResponse = await userStore.login(
+      credentials.value.email,
+      credentials.value.password
+  );
+  if (loginResponse.success) {
+    router.push(route.query.redirect ?? '/');
+  } else {
+    message.value = loginResponse.body.message;
+    errors.value = Object.assign({}, loginResponse.body.errors);
+  }
 }
 
 </script>
