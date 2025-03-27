@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {mande} from "mande";
+import {mande, defaults} from "mande";
 
 const auth = mande('http://vue-state-management-backend.test/api/auth');
 const user = mande('http://vue-state-management-backend.test/api/user');
@@ -28,20 +28,19 @@ export const useUserStore = defineStore('user', {
             this.authToken = token;
             localStorage.setItem('token', JSON.stringify(token));
             if (token) {
+                defaults.headers.Authorization = `Bearer ${token}`
                 try {
                     await this.fetchUser();
                 } catch (e) {
                     this.setToken(null);
                 }
+            } else {
+                delete defaults.headers.Authorization;
             }
         },
         async fetchUser() {
             // Fetch details
-            const response = await user.get({
-                headers: {
-                    Authorization: `Bearer ${this.authToken}`
-                }
-            });
+            const response = await user.get();
             this.user = response;
         },
         async register(name, email, password) {

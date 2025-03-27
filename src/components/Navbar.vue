@@ -2,6 +2,11 @@
   <nav class="bg-white shadow">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 justify-between">
+        <div class="flex items-center">
+          <RouterLink to="/" class="font-bold relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+            Acme store
+          </RouterLink>
+        </div>
         <div class="flex items-center ml-auto">
           <div class="md:ml-4 md:flex md:shrink-0 md:items-center">
             <template v-if="!userStore.user">
@@ -17,7 +22,7 @@
                 {{ userStore.user.name }}
               </RouterLink>
             </template>
-            <button type="button" class="ml-5 relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2" @click="$emit('cart-clicked')">
+            <button type="button" class="ml-5 relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2" @click="cartOverlayStore.open()">
               <span class="absolute -inset-1.5" />
               <span class="sr-only">View cart</span>
               <ShoppingCartIcon class="size-6" aria-hidden="true" />
@@ -37,9 +42,11 @@ import {ShoppingCartIcon} from '@heroicons/vue/24/outline'
 import {computed} from "vue";
 import {useCartStore} from "@/stores/Cart.js";
 import {useUserStore} from "@/stores/User.js";
+import {useCartOverlayStore} from "@/stores/CartOverlay.js";
 
 const userStore = useUserStore();
 const cartStore = useCartStore();
+const cartOverlayStore = useCartOverlayStore();
 
 const amount = computed(() => {
   return cartStore.cart.reduce((total, product) => total + product.quantity, 0);

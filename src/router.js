@@ -6,11 +6,19 @@ import Login from "@/pages/Login.vue";
 import Register from "@/pages/Register.vue";
 import {useUserStore} from "@/stores/User.js";
 import Profile from "@/pages/Profile.vue";
+import Thankyou from "@/pages/Thankyou.vue";
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/checkout', component: Checkout },
+    {
+        path: '/checkout',
+        component: Checkout,
+        meta: {
+            requiresAuth: true,
+        }
+    },
     { path: '/login', component: Login },
+    { path: '/thankyou/:orderId', component: Thankyou, name: 'thankyou' },
     { path: '/register', component: Register },
     {
         path: '/profile',

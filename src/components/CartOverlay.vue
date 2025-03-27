@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog class="relative z-10" @close="$emit('close')">
+  <TransitionRoot as="template" :show="cartOverlayStore.visible">
+    <Dialog class="relative z-10" @close="cartOverlayStore.close()">
       <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-500/75 transition-opacity" />
       </TransitionChild>
@@ -15,7 +15,7 @@
                     <div class="flex items-start justify-between">
                       <DialogTitle class="text-lg font-medium text-gray-900">Shopping cart</DialogTitle>
                       <div class="ml-3 flex h-7 items-center">
-                        <button type="button" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500" @click="$emit('close')">
+                        <button type="button" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500" @click="cartOverlayStore.close()">
                           <span class="absolute -inset-0.5" />
                           <span class="sr-only">Close panel</span>
                           <XMarkIcon class="size-6" aria-hidden="true" />
@@ -38,12 +38,12 @@
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     <div class="mt-6">
                       <Button class="w-full" size="lg" as-child>
-                        <RouterLink to="/checkout">Checkout</RouterLink>
+                        <RouterLink to="/checkout" @click="cartOverlayStore.close()">Checkout</RouterLink>
                       </Button>
                     </div>
                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
-                        <Button type="button" variant="link" @click="$emit('close')">
+                        <Button type="button" variant="link" @click="cartOverlayStore.close()">
                           Continue Shopping
                           <span aria-hidden="true"> &rarr;</span>
                         </Button>
@@ -67,10 +67,10 @@ import Cart from "@/components/Cart.vue";
 import {format} from "@/lib/number.js";
 import {useCartStore} from "@/stores/Cart.js";
 import {Button} from "@/components/ui/button/index.js";
+import {useCartOverlayStore} from "@/stores/CartOverlay.js";
+
 const cartStore = useCartStore();
 
-const props = defineProps({
-  open: Boolean
-})
+const cartOverlayStore = useCartOverlayStore();
 
 </script>
