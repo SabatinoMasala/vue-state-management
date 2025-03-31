@@ -26,14 +26,18 @@ export const useCartStore = defineStore('cart', () => {
         cart.value = [];
     }
 
-    const incrementProduct = (product) => {
+    const restoreLine = (line) => {
+        cart.value.push(line);
+    }
+
+    const incrementProduct = (product, amount = 1) => {
         const foundValue = cart.value.find((value) => value.id === product.id);
         if (foundValue) {
-            foundValue.quantity++;
+            foundValue.quantity += amount;
         } else {
             cart.value.push({
                 ...product,
-                quantity: 1,
+                quantity: amount,
             })
         }
         console.log(cart.value);
@@ -73,9 +77,15 @@ export const useCartStore = defineStore('cart', () => {
         return orderConfirmation;
     }
 
+    const isEmpty = computed(() => {
+        return cart.value.length === 0;
+    })
+
     return {
+        isEmpty,
         cart,
         subtotal,
+        restoreLine,
         taxes,
         total,
         convert,

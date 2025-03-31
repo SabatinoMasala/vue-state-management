@@ -8,7 +8,7 @@
       </div>
       <h2 class="sr-only">Checkout</h2>
 
-      <div class="mt-10 lg:mt-0">
+      <div class="mt-10 lg:mt-0" v-if="!cartStore.isEmpty">
         <h2 class="text-lg font-medium text-gray-900">Order summary</h2>
 
         <div class="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
@@ -42,6 +42,14 @@
           <Button variant="" @click="confirmOrder">Confirm order</Button>
         </div>
       </div>
+      <div v-else>
+        <CartEmpty />
+        <div class="text-center mt-3">
+          <RouterLink to="/" as-child>
+            <Button>Let's shop!</Button>
+          </RouterLink>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +62,7 @@ import {useCartStore} from "@/stores/Cart.js";
 import {useProductsStore} from "@/stores/Products.js";
 import ProductGrid from "@/components/ProductGrid.vue";
 import {Button} from "@/components/ui/button/index.js";
+import CartEmpty from "@/components/CartEmpty.vue";
 
 const cartStore = useCartStore();
 const productsStore = useProductsStore();

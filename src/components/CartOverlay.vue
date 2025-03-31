@@ -23,14 +23,20 @@
                       </div>
                     </div>
 
-                    <div class="mt-8">
+                    <div class="mt-8" v-if="!cartStore.isEmpty">
                       <div class="flow-root">
                         <Cart />
                       </div>
                     </div>
+                    <div v-else class="h-full flex justify-center items-center flex-col">
+                      <CartEmpty />
+                      <Button size="lg" class="mt-3" @click="cartOverlayStore.close()">
+                        Let's shop!
+                      </Button>
+                    </div>
                   </div>
 
-                  <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+                  <div class="border-t border-gray-200 px-4 py-6 sm:px-6" v-if="!cartStore.isEmpty">
                     <div class="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
                       <p>{{ format(cartStore.subtotal) }}</p>
@@ -68,6 +74,7 @@ import {format} from "@/lib/number.js";
 import {useCartStore} from "@/stores/Cart.js";
 import {Button} from "@/components/ui/button/index.js";
 import {useCartOverlayStore} from "@/stores/CartOverlay.js";
+import CartEmpty from "@/components/CartEmpty.vue";
 
 const cartStore = useCartStore();
 
