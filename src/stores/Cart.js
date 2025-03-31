@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia';
 import {computed, ref, watch} from "vue";
+import {useOrdersStore} from "@/stores/Orders.js";
 
 export const useCartStore = defineStore('cart', () => {
     const cart = ref([]);
@@ -23,6 +24,12 @@ export const useCartStore = defineStore('cart', () => {
 
     const clearCart = () => {
         cart.value = [];
+    }
+
+    const convert = async () => {
+        const returnValue = await useOrdersStore().confirmOrder(cart.value);
+        clearCart();
+        return returnValue;
     }
 
     const incrementProduct = (product) => {
@@ -71,6 +78,7 @@ export const useCartStore = defineStore('cart', () => {
         subtotal,
         taxes,
         total,
+        convert,
         amountForProduct,
         clearCart,
         removeProduct,

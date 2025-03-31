@@ -60,10 +60,14 @@ const productsStore = useProductsStore();
 
 const router = useRouter();
 
-const confirmOrder = () => {
-  alert('Thanks for ordering!');
-  cartStore.clearCart();
-  router.push('/');
+const confirmOrder = async () => {
+  const response = await cartStore.convert();
+  router.push({
+    name: 'thankyou',
+    params: {
+      orderId: response.data.id,
+    }
+  })
 }
 
 </script>

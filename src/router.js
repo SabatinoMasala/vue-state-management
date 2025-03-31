@@ -10,7 +10,13 @@ import Thankyou from "@/pages/Thankyou.vue";
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/checkout', component: Checkout },
+    {
+        path: '/checkout',
+        component: Checkout,
+        meta: {
+            requiresAuth: true,
+        }
+    },
     { path: '/login', component: Login },
     { path: '/thankyou/:orderId', component: Thankyou, name: 'thankyou' },
     { path: '/register', component: Register },
