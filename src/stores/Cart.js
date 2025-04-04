@@ -5,21 +5,14 @@ import {useOrdersStore} from "@/stores/Orders.js";
 export const useCartStore = defineStore('cart', () => {
     const cart = ref([]);
 
-    watch(
-        () => cart,
-        () => {
-            localStorage.setItem('cart', JSON.stringify(cart.value));
-        },
-        {deep: true}
-    )
-
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-        cart.value = JSON.parse(savedCart);
-    }
-
     const removeProduct = (product) => {
         cart.value = cart.value.filter((value) => value.id !== product.id);
+        useCartStore().toastError(`${product.title} removed from cart`, {
+            label: 'Undo',
+            onClick: () => {
+                restoreLine(product);
+            }
+        });
     }
 
     const clearCart = () => {
@@ -40,7 +33,7 @@ export const useCartStore = defineStore('cart', () => {
                 quantity: amount,
             })
         }
-        console.log(cart.value);
+        useCartStore().toastSuccess(`${product.title} added to cart`);
     }
 
     const decrementProduct = (product) => {
@@ -95,4 +88,6 @@ export const useCartStore = defineStore('cart', () => {
         incrementProduct,
         decrementProduct,
     }
+}, {
+    persist: true,
 });
