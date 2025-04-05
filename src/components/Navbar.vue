@@ -18,7 +18,7 @@
               </RouterLink>
             </template>
             <template v-else>
-              <RouterLink to="/profile" class="relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+              <RouterLink data-testid="username" to="/profile" class="relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
                 {{ userStore.user.name }}
               </RouterLink>
             </template>
@@ -26,7 +26,7 @@
               <span class="absolute -inset-1.5" />
               <span class="sr-only">View cart</span>
               <ShoppingCartIcon class="size-6" aria-hidden="true" />
-              <span class="ml-1 bg-red-500 w-6 h-6 text-sm flex items-center justify-center block rounded-full text-white" v-if="amount > 0">
+              <span data-testid="navbar-badge" class="ml-1 bg-red-500 w-6 h-6 text-sm flex items-center justify-center block rounded-full text-white" v-if="amount > 0">
                 {{ amount < 10 ? amount : '9+' }}
               </span>
             </button>
