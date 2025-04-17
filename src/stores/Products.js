@@ -5,7 +5,13 @@ import {useCartStore} from "@/stores/Cart.js";
 const products = mande('http://vue-state-management-backend.test/api/products');
 
 export const useProductsStore = defineStore('products', {
+    persist: {
+        enabled: true,
+        pick: ['products', 'canSyncInBackground', 'updatedAt']
+    },
     state: () => ({
+        updatedAt: null,
+        canSyncInBackground: false,
         products: [],
         loading: false,
         didLoad: false,
@@ -24,18 +30,28 @@ export const useProductsStore = defineStore('products', {
                 return;
             }
             let data = [];
-            this.loading = true;
+            const deltaInMs = Date.now() - this.updatedAt;
+            const deltaInSeconds = Math.round(deltaInMs / 1000);
+            if (!this.canSyncInBackground || deltaInSeconds > 60 * 60) {
+                this.loading = true;
+            }
             try {
                 const response = await products.get();
                 data = response.data;
+                this.$patch({
+                    updatedAt: Date.now(),
+                    canSyncInBackground: true,
+                    products: data,
+                    loading: false,
+                    didLoad: true,
+                })
             } catch (e) {
                 console.error(e);
+                this.$patch({
+                    didLoad: true,
+                    loading: false,
+                })
             }
-            this.$patch({
-                products: data,
-                loading: false,
-                didLoad: true,
-            })
         }
     }
 })
