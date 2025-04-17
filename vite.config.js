@@ -13,6 +13,10 @@ export default defineConfig({
       plugins: [tailwind(), autoprefixer()],
     },
   },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+  },
   plugins: [
     vue(),
     vueDevTools(),
