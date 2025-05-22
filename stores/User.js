@@ -39,7 +39,11 @@ export const useUserStore = defineStore('user', {
         },
         async fetchUser() {
             // Fetch details
-            const response = await user.get();
+            const response = await user.get({
+                headers: {
+                    Authorization: `Bearer ${this.authToken}`
+                }
+            });
             this.user = response;
         },
         async register(name, email, password) {
