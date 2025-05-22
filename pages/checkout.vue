@@ -40,6 +40,9 @@
         </div>
         <div class="text-center mt-5">
           <Button variant="" @click="confirmOrder">Confirm order</Button>
+          <div class="flex justify-center mt-3">
+            <EstimatedDeliveryTime />
+          </div>
         </div>
       </div>
       <div v-else>

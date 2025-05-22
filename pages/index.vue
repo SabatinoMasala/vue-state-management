@@ -3,6 +3,9 @@
     <Navbar
         @cart-clicked="cartOverlayOpen = true" />
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-4">
+      <Alert>
+        <EstimatedDeliveryTime />
+      </Alert>
       <ProductGrid :products="productsStore.products" :loading="productsStore.loading" />
     </div>
   </div>
