@@ -22,6 +22,9 @@
                 {{ userStore.user.name }}
               </NuxtLink>
             </template>
+            <button class="ml-5 relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2" @click="toggleCurrency">
+              {{ currency }}
+            </button>
             <button type="button" class="ml-5 relative flex bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2" @click="cartOverlayStore.open()">
               <span class="absolute -inset-1.5" />
               <span class="sr-only">View cart</span>
@@ -51,5 +54,19 @@ const cartOverlayStore = useCartOverlayStore();
 const amount = computed(() => {
   return cartStore.cart.reduce((total, product) => total + product.quantity, 0);
 });
+
+const currency = useCookie('currency', {
+  default() {
+    return '$';
+  }
+});
+
+const toggleCurrency = () => {
+  if (currency.value === '$') {
+    currency.value = '€';
+  } else {
+    currency.value = '$';
+  }
+}
 
 </script>

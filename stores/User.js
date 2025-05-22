@@ -5,6 +5,10 @@ const auth = mande('http://vue-state-management-backend.test/api/auth');
 const user = mande('http://vue-state-management-backend.test/api/user');
 
 export const useUserStore = defineStore('user', {
+    persist: {
+        enabled: true,
+        pick: ['authToken'],
+    },
     state: () => {
         return {
             user: null,
@@ -18,24 +22,19 @@ export const useUserStore = defineStore('user', {
             this.setToken(null);
         },
         async init() {
-            const token = JSON.parse(localStorage.getItem('token'));
-            if (token) {
-                await this.setToken(token);
+            if (this.authToken) {
+                await this.setToken(this.authToken);
             }
             this.didInit = true;
         },
         async setToken(token) {
             this.authToken = token;
-            localStorage.setItem('token', JSON.stringify(token));
             if (token) {
-                defaults.headers.Authorization = `Bearer ${token}`
                 try {
                     await this.fetchUser();
                 } catch (e) {
                     this.setToken(null);
                 }
-            } else {
-                delete defaults.headers.Authorization;
             }
         },
         async fetchUser() {
