@@ -1,1 +1,1 @@
-# Vue state management - props
+# Vue state management - subscribe
